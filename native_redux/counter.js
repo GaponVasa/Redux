@@ -1,58 +1,41 @@
-'use strict';
+"use strict";
 
-let buttons = document.querySelectorAll('.btn');
+let buttons = document.querySelectorAll(".btn");
 let incrementButton = buttons[0];
 let decrementButton = buttons[1];
-let elementResult = document.getElementById('result');
+let elementResult = document.getElementById("result");
 
 //Reducer
-function updateState(state, action){
-  if(action.type === 'INCREMENT'){
-    return {count: state.count + action.amount};
-  }else if(action.type === 'DECREMENT'){
-    return {count: state.count - action.amount};
-  }else{
-    return state;
-  }
-}
-//store
-class Store{
-  constructor(updateState, state){
-    this._updateState = updateState;
-    this._state = state;
-    this._callbacks = [];
-  }
-
-  get state(){
-    return this._state;
-  }
-
-  update(action){
-    this._state = this._updateState(this._state, action);
-    this._callbacks.forEach(callback => callback());
-  }
-
-  subscribe(callback){
-    this._callbacks.push(callback);
-    return () => this._callbacks = this._callbacks.filter(cd => cd !== callback);
+function reducer(state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + action.amount };
+      break;
+    case "DECREMENT":
+      return { count: state.count - action.amount };
+      break;
+    default:
+      return state;
   }
 }
 
-const initalState = {count: 0};
+const initalState = { count: 0 };
 
-const store = new Store(updateState, initalState);
+const store = createStore(reducer, initalState);
 
 //action
-const incrementAction = {type: 'INCREMENT', amount: 1};
-const decrementAction = {type: 'DECREMENT', amount: 1};
+const incrementAction = { type: "INCREMENT", amount: 1 };
+const decrementAction = { type: "DECREMENT", amount: 1 };
 
-const showResult = ()=>{
-  const state = store.state.count;
-  console.log('State.changed', store.state.count);
+const showResult = () => {
+  const state = store.getState().count;
   elementResult.innerHTML = state;
-}
-const unsubscribe = store.subscribe(()=>showResult());
+};
+const unsubscribe = store.subscribe(() => showResult());
 
-incrementButton.addEventListener('click',()=>store.update(incrementAction));
-decrementButton.addEventListener('click', ()=>store.update(decrementAction));
-
+incrementButton.addEventListener("click", () =>
+  store.dispatch(incrementAction)
+);
+decrementButton.addEventListener("click", () =>
+  store.dispatch(decrementAction)
+);

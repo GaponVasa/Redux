@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Native REDUX. Counter.</title>
+  <title>Native REDUX. Counter with variable.</title>
   <link 
     rel="stylesheet" 
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
@@ -19,14 +19,18 @@
   </style>
 </head>
 <body>
-  <main class="container my-3 bigText">
+  <main class="container my-3">
     <div class="d-flex flex-column">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center  bigText">
           <div id="result" class="">0</div>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center  bigText">
             <button class="btn btn-primary col-1 mr-3"> + </button>
+            <button class="btn btn-primary col-1 mr-3"> Reset </button>
             <button class="btn btn-primary col-1"> - </button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <input id="input" type="text" class="col-3 my-3" placeholder="Enter amount" value="1" />
         </div>
     </div>
   </main>
@@ -46,6 +50,6 @@
     crossorigin="anonymous"
   ></script>
   <script src="redux.js"></script>
-  <script src="counter.js"></script>
+  <script src="counter_with_variable.js"></script>
 </body>
 </html>
