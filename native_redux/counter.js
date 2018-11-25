@@ -1,5 +1,10 @@
 'use strict';
 
+let buttons = document.querySelectorAll('.btn');
+let incrementButton = buttons[0];
+let decrementButton = buttons[1];
+let elementResult = document.getElementById('result');
+
 //Reducer
 function updateState(state, action){
   if(action.type === 'INCREMENT'){
@@ -17,6 +22,7 @@ class Store{
     this._state = state;
     this._callbacks = [];
   }
+
   get state(){
     return this._state;
   }
@@ -37,13 +43,16 @@ const initalState = {count: 0};
 const store = new Store(updateState, initalState);
 
 //action
-const incrementAction = {type: 'INCREMENT', amount: 5};
-const decrementAction = {type: 'DECREMENT', amount: 3};
-//
-const unsubscribe = store.subscribe(()=>console.log('State.changed 1', store.state));
-store.subscribe(()=>console.log('State.changed 2', store.state));
+const incrementAction = {type: 'INCREMENT', amount: 1};
+const decrementAction = {type: 'DECREMENT', amount: 1};
 
-store.update(incrementAction);
-unsubscribe();
-store.update(decrementAction);
-store.update({});
+const showResult = ()=>{
+  const state = store.state.count;
+  console.log('State.changed', store.state.count);
+  elementResult.innerHTML = state;
+}
+const unsubscribe = store.subscribe(()=>showResult());
+
+incrementButton.addEventListener('click',()=>store.update(incrementAction));
+decrementButton.addEventListener('click', ()=>store.update(decrementAction));
+
