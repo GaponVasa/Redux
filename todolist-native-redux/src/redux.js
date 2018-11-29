@@ -1,5 +1,4 @@
-'use strict';
-function createStore(reducer, initialState) {
+export function createStore(reducer, initialState) {
   let state = initialState;
   let callbacks = [];
 
@@ -17,3 +16,5 @@ function createStore(reducer, initialState) {
 
   return { getState, dispatch, subscribe };
 }
+
+export default createStore;
