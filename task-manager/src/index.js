@@ -1,17 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import * as serviceWorker from './serviceWorker';
+import {Provider} from 'react-redux';
+import store from './store.js';
 
-const tasks = (state, action)=>{
-  return state;
-}
-
-const store = createStore(tasks);
-console.log('Provider');
 
 ReactDOM.render(
   <Provider store={store}>
