@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import InputGroup from '../components/input-group/input-group';
 
 const Header = props => {
   const{
