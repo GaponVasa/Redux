@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 import store from './store';
-import addAction from './actions/action-add';
-import editAction from './actions/action-edit';
-import deleteAction from './actions/action-delete';
+import {addAction, editAction, deleteAction} from './actions/actions';
 import Button from './components/button.js';
 import Input from './components/input.js';
 import ShowCard from './containers/show_card';
@@ -35,13 +33,15 @@ class App extends Component {
 
   addCard = () => {
     const addText = this.state.value;
-    const cards = store.getState().cards;
-    const length = cards.length;
-    const addId = length===0 ? 0 : cards[length - 1].id + 1;
-    const card = { id: addId, text: addText };
-
-    store.dispatch(addAction(card));
-    this.setState({ value: '' });
+    const oneCharacter = /[a-z]|[A-Z]|\d/g.test(addText);
+    if(oneCharacter){
+      const cards = store.getState().cards;
+      const length = cards.length;
+      const addId = length===0 ? 0 : cards[length - 1].id + 1;
+      const card = { id: addId, text: addText };
+      store.dispatch(addAction(card));
+      this.setState({ value: '' });
+    }
   };
 
   editCard = (card) => {

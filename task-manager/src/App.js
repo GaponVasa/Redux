@@ -6,6 +6,8 @@ import './App.css';
 import Header from './containers/header';
 import TaskList from './containers/task-list';
 
+import {connect} from 'react-redux';
+
 
 class App extends Component {
 
@@ -14,6 +16,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('App this.props',this.props)
     return (
       <div className="container d-flex flex-column border my-3">
         <Header
@@ -51,4 +54,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state)=>{
+  return{
+    tasks: state.tasks,
+    filtered: state.filtered
+  }
+}
+
+// const mapDispatchToProps = ()=>{
+
+// }
+
+export default connect(mapStateToProps )(App);
