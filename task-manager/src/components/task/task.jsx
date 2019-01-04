@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FormCheckInline from '../form-check-inline/form-check-inline';
 import Button from '../button/button';
 
-const Task = ({onclick, textTask}) => {
+const Task = ({onclickEdit, onclickDelete, textTask, currentId}) => {
   return (
     <div className="row border rounded m-3">
       <FormCheckInline
@@ -16,12 +16,14 @@ const Task = ({onclick, textTask}) => {
         <Button
           classNameButton={'btn btn-outline-primary'}
           innerText={'Edit'}
-          onclickButton={onclick}
+          currentId={currentId}
+          onclickButton={onclickEdit}
         />
         <Button
           classNameButton={'btn btn-outline-danger ml-3'}
           innerText={'Delete'}
-          onclickButton={onclick}
+          currentId={currentId}
+          onclickButton={onclickDelete}
         />
       </div>
     </div>
@@ -29,8 +31,10 @@ const Task = ({onclick, textTask}) => {
 };
 
 Task.propTypes = {
-  onclick: PropTypes.func,
+  onclickEdit: PropTypes.func,
+  onclickDelete: PropTypes.func,
   textTask: PropTypes.string,
+  currentId: PropTypes.number,
 };
 
 export default Task;

@@ -20,7 +20,7 @@ export const InputGroup = props => {
       <Input 
         className={className}
         placeholder={placeholder} 
-        values={values}
+        value={values}
         onChange={onChange}
       />
       <div className="input-group-append">
@@ -49,7 +49,7 @@ InputGroup.propTypes = {
 
 InputGroup.defaultProps = {
   type: 'text',
-  className:'form-control',
+  className:'form-control mr-0',
   placeholder:'Enter text',
 }
 

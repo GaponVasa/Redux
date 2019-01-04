@@ -1,20 +1,21 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import Task from '../components/task/task';
-import storeArray from '../others/array';
 import randomId from '../others/random_id';
 
 class TaskList extends Component {
   render() {
-    const {onclick} = this.props;
+    const {onclickEdit, onclickDelete, storeArray} = this.props;
     return (
       <div className='d-flex flex-column tasks'>
         {
           storeArray.map(el=>{
             return (<Task
               key={randomId()}
-              textTask={el}
-              onclick={onclick}
+              textTask={el.bodyTask}
+              currentId={el.id}
+              onclickEdit={onclickEdit}
+              onclickDelete={onclickDelete}
             />)
           })
         }
@@ -24,7 +25,9 @@ class TaskList extends Component {
 }
 
 TaskList.propTypes = {
-  onclick: PropTypes.func
+  onclickEdit: PropTypes.func,
+  onclickDelete: PropTypes.func,
+  storeArray: PropTypes.array,
 };
 
 export default TaskList;
