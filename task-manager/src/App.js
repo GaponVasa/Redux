@@ -6,7 +6,7 @@ import FormCheckInline from './components/form-check-inline/form-check-inline';
 import './App.css';
 import Header from './containers/header';
 import TaskList from './containers/task-list';
-import {actionAddTask, actionDeleteTask} from './store/store';
+import {actionAddTask, actionDeleteTask, actionEditTask} from './store/store';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -38,9 +38,15 @@ class App extends Component {
   }
 
   onclickDeleteButton = (event)=>{
-    const{actionDeleteTask, tasks} = this.props;
+    const{actionDeleteTask} = this.props;
     const currentId = event.target.getAttribute('data-currentid');
     actionDeleteTask(currentId);
+  }
+
+  onclickEditButton = (event)=>{
+    const{actionEditTask} = this.props;
+    const currentId = event.target.getAttribute('data-currentid');
+    actionEditTask(currentId, 'ok');
   }
 
   onclick = ()=>{
@@ -76,7 +82,7 @@ class App extends Component {
           />
         </div>
         <TaskList
-          onclickEdit={this.onclick}
+          onclickEdit={this.onclickEditButton}
           onclickDelete={this.onclickDeleteButton}
           storeArray={tasks}
         />
@@ -106,7 +112,8 @@ const putStateToProps = (state)=>{
 const putActionToProps = (dispatch)=>{
   return {
     actionAddTask: bindActionCreators(actionAddTask, dispatch),
-    actionDeleteTask: bindActionCreators(actionDeleteTask, dispatch)
+    actionDeleteTask: bindActionCreators(actionDeleteTask, dispatch),
+    actionEditTask: bindActionCreators(actionEditTask, dispatch)
   }
 }
 

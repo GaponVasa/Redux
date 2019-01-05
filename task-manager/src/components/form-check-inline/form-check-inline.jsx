@@ -19,12 +19,20 @@ const FormCheckInline = ({classNameInline, textTask, valueCheckbox, onclick}) =>
         value={valueCheckbox}
         onClick={onclick}
       />
-      <label 
+      {/* <label 
         className="form-check-label" 
         htmlFor={ID}
       >
         {textTask}
-      </label>
+      </label> */}
+      <Input 
+        className="col" 
+        type="text" 
+        placeholder={'Enter text'}
+        value={textTask}
+        //value={valueCheckbox}
+        //onClick={onclick}
+      />
     </div>
   );
 };
