@@ -13,6 +13,7 @@ class TaskList extends Component {
             <Task
               key={randomId()}
               textTask={el.bodyTask}
+              complete={el.complete}
               currentId={el.id}
               onclickEdit={onclickEdit}
               onclickDelete={onclickDelete}

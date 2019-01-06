@@ -59,17 +59,14 @@ const tasks = (state = initialState, action) => {
         filtered: false
       }
     case COMPLETE_TASK:
-      console.log('COMPLETE_TASK');
-      console.log('payload',payload);
       return {
-        tasks: tasks.filter(el => {
+        tasks: tasks.map(el => {
           if (el.id === parseInt(payload)) {
-            console.log('el.complete',el  );
             return {
               id: el.id,
               bodyTask: el.bodyTask,
               changed: el.changed,
-              complete: true
+              complete: !el.complete
             }
           } else {
             return el;

@@ -43,7 +43,6 @@ class App extends Component {
   };
 
   onclickCompleteButton = currentId => {
-    console.log('App   actionCompleteTask')
     const { actionCompleteTask } = this.props;
     actionCompleteTask(currentId);
   };

@@ -8,8 +8,7 @@ class Task extends Component {
     super(props);
     this.state = {
       editValue: "",
-      editFlag: false,
-      completeFlag: false
+      editFlag: false
     };
   }
 
@@ -28,14 +27,8 @@ class Task extends Component {
     }
   };
 
-  clickCompletCheckbox = (event) =>{
-    console.log('ok');
-    console.log('event', event.target.checked);
-    const checkedInput = event.target.checked
+  clickCompletCheckbox = () =>{
     const { onclickComplete, currentId } = this.props;
-    const { completeFlag } = this.state;
-    console.log('completeFlag',completeFlag);
-    this.setState({ completeFlag: checkedInput });
     onclickComplete(currentId);
     
   }
@@ -46,8 +39,8 @@ class Task extends Component {
   };
 
   render() {
-    const { onclickDelete, textTask, currentId } = this.props;
-    const { editValue, editFlag, completeFlag } = this.state;
+    const { complete, onclickDelete, textTask, currentId } = this.props;
+    const { editValue, editFlag } = this.state;
     return (
       <div className="row border rounded m-3">
         <FormCheckInline
@@ -55,9 +48,9 @@ class Task extends Component {
           textTask={textTask}
           onclick={this.clickCompletCheckbox}
           flagInput={editFlag}
-          completeFlag={completeFlag}
           editvalue={editValue}
           onchange={this.changeValue}
+          complete={complete}
         />
         <div className="col-2 my-3 p-0">
           <Button
@@ -83,7 +76,8 @@ Task.propTypes = {
   onclickEdit: PropTypes.func,
   onclickDelete: PropTypes.func,
   textTask: PropTypes.string,
-  currentId: PropTypes.number
+  currentId: PropTypes.number,
+  complete: PropTypes.bool,
 };
 
 export default Task;

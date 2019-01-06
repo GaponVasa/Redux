@@ -12,7 +12,7 @@ const FormCheckInline = props => {
     flagInput, 
     onchange,
     editvalue, 
-    completeFlag
+    complete
   } = props;
   const ID = "inlineCheckbox" + randomId();
   const addClass = "form-check-inline ";
@@ -20,12 +20,11 @@ const FormCheckInline = props => {
     return classNameInline ? addClass + classNameInline : addClass;
   }
   const returnLable = ()=>{
-    // const classCheckLable = "form-check-label";
-    // const strikeClass = ' strikethrough';
-    //console.log('returnLable', completeFlag ? classCheckLable + strikeClass: classCheckLable)
+    const classCheckLable = "form-check-label";
+    const strikeClass = ' strikethrough';
     return (
       <label 
-        className="form-check-label"
+        className={complete ? classCheckLable + strikeClass: classCheckLable}
         htmlFor={ID}
       >
         {textTask}
@@ -49,8 +48,9 @@ const FormCheckInline = props => {
         className="form-check-input" 
         type="checkbox" 
         id={ID}
-        onClick={onclick}
+        onChange={onclick}
         value={true}
+        checked={complete ? 'checked' : null}
       />
       {flagInput ? returnInput() : returnLable()}
     </div>
@@ -61,10 +61,10 @@ FormCheckInline.propTypes = {
   classNameInline: PropTypes.string, 
   textTask: PropTypes.string,
   flagInput:  PropTypes.bool,
-  completeFlag:  PropTypes.bool,
   onclick: PropTypes.func,
   onchange: PropTypes.func,
   editvalue: PropTypes.string,
+  complete:  PropTypes.bool,
 };
 
 export default FormCheckInline;
