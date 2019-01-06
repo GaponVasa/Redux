@@ -4,11 +4,44 @@ import Input from '../input/input';
 import randomId from '../../others/random_id.js';
 import './form-check-inline.css';
 
-const FormCheckInline = ({classNameInline, textTask, valueCheckbox, onclick}) => {
+const FormCheckInline = props => {
+  const {
+    classNameInline, 
+    textTask, 
+    onclick, 
+    flagInput, 
+    onchange,
+    editvalue, 
+    completeFlag
+  } = props;
   const ID = "inlineCheckbox" + randomId();
   const addClass = "form-check-inline ";
   const classInline = classNameInline =>{
     return classNameInline ? addClass + classNameInline : addClass;
+  }
+  const returnLable = ()=>{
+    // const classCheckLable = "form-check-label";
+    // const strikeClass = ' strikethrough';
+    //console.log('returnLable', completeFlag ? classCheckLable + strikeClass: classCheckLable)
+    return (
+      <label 
+        className="form-check-label"
+        htmlFor={ID}
+      >
+        {textTask}
+      </label>
+    )
+  }
+  const returnInput = ()=>{
+    return (
+      <Input 
+        className="col" 
+        type="text" 
+        placeholder={'Enter text'}
+        value={editvalue}
+        onChange={onchange}
+      />
+    )
   }
   return (
     <div className={classInline(classNameInline)}>
@@ -16,23 +49,10 @@ const FormCheckInline = ({classNameInline, textTask, valueCheckbox, onclick}) =>
         className="form-check-input" 
         type="checkbox" 
         id={ID}
-        value={valueCheckbox}
         onClick={onclick}
+        value={true}
       />
-      {/* <label 
-        className="form-check-label" 
-        htmlFor={ID}
-      >
-        {textTask}
-      </label> */}
-      <Input 
-        className="col" 
-        type="text" 
-        placeholder={'Enter text'}
-        value={textTask}
-        //value={valueCheckbox}
-        //onClick={onclick}
-      />
+      {flagInput ? returnInput() : returnLable()}
     </div>
   );
 };
@@ -40,8 +60,11 @@ const FormCheckInline = ({classNameInline, textTask, valueCheckbox, onclick}) =>
 FormCheckInline.propTypes = {
   classNameInline: PropTypes.string, 
   textTask: PropTypes.string,
-  valueCheckbox: PropTypes.bool,
+  flagInput:  PropTypes.bool,
+  completeFlag:  PropTypes.bool,
   onclick: PropTypes.func,
+  onchange: PropTypes.func,
+  editvalue: PropTypes.string,
 };
 
 export default FormCheckInline;

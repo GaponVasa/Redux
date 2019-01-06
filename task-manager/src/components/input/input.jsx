@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
 export const Input = props => {
-  return (
-    <input {...props}/>
-  );
+  return <input {...props} />;
 };
 
 export default Input;

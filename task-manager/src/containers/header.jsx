@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import InputGroup from '../components/input-group/input-group';
+import React from "react";
+import PropTypes from "prop-types";
+import InputGroup from "../components/input-group/input-group";
 
 const Header = props => {
-  const{
+  const {
     classNameInputGroup,
-    classNameButton,  
-    idButton, 
-    innerText, 
-    onclickButton, 
-    values, 
+    classNameButton,
+    idButton,
+    innerText,
+    onclickButton,
+    values,
     onChange
   } = props;
   return (
@@ -21,9 +21,9 @@ const Header = props => {
         <InputGroup
           classNameInputGroup={classNameInputGroup}
           classNameButton={classNameButton}
-          idButton={idButton} 
+          idButton={idButton}
           innerText={innerText}
-          onclickButton={onclickButton} 
+          onclickButton={onclickButton}
           values={values}
           onChange={onChange}
         />
@@ -33,13 +33,13 @@ const Header = props => {
 };
 
 Header.propTypes = {
-  classNameInputGroup : PropTypes.string,
-  classNameButton : PropTypes.string,  
-  idButton : PropTypes.string, 
-  innerText : PropTypes.string, 
-  onclickButton : PropTypes.func, 
-  values : PropTypes.string, 
-  onChange : PropTypes.func
+  classNameInputGroup: PropTypes.string,
+  classNameButton: PropTypes.string,
+  idButton: PropTypes.string,
+  innerText: PropTypes.string,
+  onclickButton: PropTypes.func,
+  values: PropTypes.string,
+  onChange: PropTypes.func
 };
 
 export default Header;

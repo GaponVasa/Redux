@@ -1,82 +1,84 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropTypes from 'prop-types';
-import InputGroup from './components/input-group/input-group';
-import FormCheckInline from './components/form-check-inline/form-check-inline';
-import './App.css';
-import Header from './containers/header';
-import TaskList from './containers/task-list';
-import {actionAddTask, actionDeleteTask, actionEditTask} from './store/store';
+import PropTypes from "prop-types";
+import InputGroup from "./components/input-group/input-group";
+import FormCheckInline from "./components/form-check-inline/form-check-inline";
+import "./App.css";
+import Header from "./containers/header";
+import TaskList from "./containers/task-list";
+import { actionAddTask, actionDeleteTask, actionEditTask, actionCompleteTask } from "./store/store";
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class App extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      addValue:'',
-      searchValue:'',
-    }
+      addValue: "",
+      searchValue: ""
+    };
   }
 
-  onchangeAddValue = (event)=>{
+  onchangeAddValue = event => {
     const textValue = event.target.value;
-    this.setState({addValue:textValue});
-  }
+    this.setState({ addValue: textValue });
+  };
 
-  onchangeSearchValue = (event)=>{
+  onchangeSearchValue = event => {
     const textValue = event.target.value;
-    this.setState({searchValue:textValue});
-  }
+    this.setState({ searchValue: textValue });
+  };
 
-  onclickAddButton = ()=>{
-    const{actionAddTask} = this.props;
+  onclickAddButton = () => {
+    const { actionAddTask } = this.props;
     actionAddTask(this.state.addValue);
-    this.setState({addValue:''});
-  }
+    this.setState({ addValue: "" });
+  };
 
-  onclickDeleteButton = (event)=>{
-    const{actionDeleteTask} = this.props;
-    const currentId = event.target.getAttribute('data-currentid');
+  onclickDeleteButton = event => {
+    const { actionDeleteTask } = this.props;
+    const currentId = event.target.getAttribute("data-currentid");
     actionDeleteTask(currentId);
-  }
+  };
 
-  onclickEditButton = (event)=>{
-    const{actionEditTask} = this.props;
-    const currentId = event.target.getAttribute('data-currentid');
-    actionEditTask(currentId, 'ok');
-  }
+  onclickCompleteButton = currentId => {
+    console.log('App   actionCompleteTask')
+    const { actionCompleteTask } = this.props;
+    actionCompleteTask(currentId);
+  };
 
-  onclick = ()=>{
-    console.log('click');
-  }
+  onclickEditButton = (currentId, currentValue) => {
+    const { actionEditTask } = this.props;
+    actionEditTask(currentId, currentValue);
+  };
+
+  onclick = () => {
+    console.log("click");
+  };
 
   render() {
-    console.log('App this.props',this.props)
-    const{tasks} = this.props;
-    const{addValue, searchValue} = this.state;
-    //console.log('render() addValue',addValue);
-    //console.log('render() searchValue',searchValue);
+    console.log("App this.props", this.props);
+    const { tasks } = this.props;
+    const { addValue, searchValue } = this.state;
     return (
       <div className="container d-flex flex-column border my-3">
         <Header
-          classNameInputGroup={'input-group mr-0'}
+          classNameInputGroup={"input-group mr-0"}
           classNameButton={"btn btn-outline-secondary"}
-          idButton={'button-addon'} 
-          innerText={'Search'}
-          onclickButton={this.onclick} 
+          idButton={"button-addon"}
+          innerText={"Search"}
+          onclickButton={this.onclick}
           values={searchValue}
           onChange={this.onchangeSearchValue}
         />
         <div className="row m-3">
           <InputGroup
-            classNameInputGroup={'input-group col-12 px-0'}
+            classNameInputGroup={"input-group col-12 px-0"}
             classNameButton={"btn btn-outline-secondary"}
-            idButton={'button-addon'} 
-            innerText={'Add task'}
-            onclickButton={this.onclickAddButton} 
+            idButton={"button-addon"}
+            innerText={"Add task"}
+            onclickButton={this.onclickAddButton}
             values={addValue}
             onChange={this.onchangeAddValue}
           />
@@ -84,13 +86,14 @@ class App extends Component {
         <TaskList
           onclickEdit={this.onclickEditButton}
           onclickDelete={this.onclickDeleteButton}
+          onclickComplete={this.onclickCompleteButton}
           storeArray={tasks}
         />
-        <div className='row m-3'>
+        <div className="row m-3">
           <FormCheckInline
-            textTask={'Check all tasks'}
-            valueCheckbox={false} 
+            textTask={"Check all tasks"}
             onclick={this.onclick}
+            flagInput={false}
           />
         </div>
       </div>
@@ -100,21 +103,25 @@ class App extends Component {
 
 App.propTypes = {
   tasks: PropTypes.array
-}
+};
 
-const putStateToProps = (state)=>{
-  return{
+const putStateToProps = state => {
+  return {
     tasks: state.tasks,
     filtered: state.filtered
-  }
-}
+  };
+};
 
-const putActionToProps = (dispatch)=>{
+const putActionToProps = dispatch => {
   return {
     actionAddTask: bindActionCreators(actionAddTask, dispatch),
     actionDeleteTask: bindActionCreators(actionDeleteTask, dispatch),
+    actionCompleteTask: bindActionCreators(actionCompleteTask, dispatch),
     actionEditTask: bindActionCreators(actionEditTask, dispatch)
-  }
-}
+  };
+};
 
-export default connect(putStateToProps, putActionToProps)(App);
+export default connect(
+  putStateToProps,
+  putActionToProps
+)(App);
