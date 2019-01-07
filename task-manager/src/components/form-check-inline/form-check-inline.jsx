@@ -39,6 +39,7 @@ const FormCheckInline = props => {
         placeholder={"Enter text"}
         value={editvalue}
         onChange={onchange}
+        autoFocus={'autofocus'}
       />
     );
   };
@@ -49,7 +50,6 @@ const FormCheckInline = props => {
         type="checkbox"
         id={ID}
         onChange={onclick}
-        value={true}
         checked={complete ? "checked" : null}
       />
       {flagInput ? returnInput() : returnLable()}

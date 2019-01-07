@@ -1,3 +1,22 @@
+# Task Manager
+
+	Програма аналогічна to do list. 
+Робить наступне:
+* добавляє справу
+* видаляє справу
+* редактує справу
+* відмічає окрему справу в списку
+* відмічає всі справи в списку
+
+Використані технології:
+* React
+* Redux
+* Bootstrap
+* Prettier
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

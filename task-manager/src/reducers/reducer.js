@@ -48,7 +48,7 @@ export const tasks = (state = initialState, action) => {
               id: el.id,
               bodyTask: payload.changedText,
               changed: true,
-              complete: false
+              complete: el.complete
             };
           } else {
             return el;
