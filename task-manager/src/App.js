@@ -46,9 +46,16 @@ class App extends Component {
     const { actionCompleteTask } = this.props;
     actionCompleteTask(currentId);
   };
+  
+  onclickCompleteAllButton = () => {
+    const { actionCompleteTask, tasks } = this.props;
+    tasks.forEach(el =>{
+      actionCompleteTask(el.id);
+    });
+  };
 
   onclickEditButton = (currentId, currentValue) => {
-    const { actionEditTask } = this.props;
+    const { actionEditTask } = this.props;    
     actionEditTask(currentId, currentValue);
   };
 
@@ -91,7 +98,7 @@ class App extends Component {
         <div className="row m-3">
           <FormCheckInline
             textTask={"Check all tasks"}
-            onclick={this.onclick}
+            onclick={this.onclickCompleteAllButton}
             flagInput={false}
           />
         </div>
